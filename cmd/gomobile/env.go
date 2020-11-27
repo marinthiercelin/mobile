@@ -22,7 +22,6 @@ var (
 	androidArmNM string
 	darwinArmNM  string
 
-	
 	bitcodeEnabled bool
 )
 
@@ -33,7 +32,7 @@ func allArchs(targetOS string) []string {
 	case "android":
 		return []string{"arm", "arm64", "386", "amd64"}
 	case "macos":
-		return  []string{"macos64"}
+		return []string{"macos64"}
 	case "macos-ui":
 		return []string{"uikitMac64"}
 	default:
@@ -193,6 +192,7 @@ func envInit() (err error) {
 			"CGO_CFLAGS="+cflags+" -arch "+archClang(archNew),
 			"CGO_CXXFLAGS="+cflags+" -arch "+archClang(archNew),
 			"CGO_LDFLAGS="+cflags+" -arch "+archClang(archNew),
+			"CGO_LDFLAGS_ALLOW=-fembed-bitcode|--target=x86_64-apple-ios13.0-macabi",
 			"CGO_ENABLED=1",
 		)
 		darwinEnv[arch] = env
